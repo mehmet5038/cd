@@ -1,0 +1,49 @@
+<html lang="en">
+<head>
+    <title>BİL481 PROJECT</title>
+    <style>
+        div{
+            margin: 0 auto;
+        }
+        h1 {
+            text-align: center;
+            color: darkslateblue;
+        }
+        h2{
+            color: black;
+            font-size: 20px;
+        }
+        h3{
+            color: black;
+            font-size: 20px;
+        }
+        h4{
+            color: black;
+            font-size: 20px;
+        }
+        p{
+            color: blue;
+        }
+
+    </style>
+</head>
+<body>
+<h1>-BIL481 Project- </h1>
+<h2>This project helps us understand the current positions of airplanes with graphics. </h2>
+<h3>-->We are using Ladd datas(Limiting Aircraft Data Displayed) from an ADSB project. </h3>
+<h4>-->You can view our charts below by selecting them: </h4>
+<!-- <div style="width: 500px;"><canvas id="dimensions"></canvas></div><br/> -->
+<p>-Line chart for current positions:</p>
+<div style="width: 800px;"><canvas id="lineChart"></canvas></div>
+
+<p>-Scatter chart for current positions:</p>
+<div style="width: 800px;"><canvas id="scatterChart"></canvas></div>
+
+<p>-Radar chart for current positions:</p>
+<div style="width: 800px;"><canvas id="radarChart"></canvas></div>
+
+<script type="module" src="scripts/lineChart.js"></script>
+<script type="module" src="scripts/scatterChart.js"></script>
+<script type="module" src="scripts/radarChart.js"></script>
+</body>
+</html>
