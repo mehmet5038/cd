@@ -1,49 +1,128 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>BİL481 PROJECT</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chart.js example</title>
     <style>
-        div{
-            margin: 0 auto;
-        }
-        h1 {
+        h1, p {
             text-align: center;
-            color: darkslateblue;
-        }
-        h2{
-            color: black;
-            font-size: 20px;
-        }
-        h3{
-            color: black;
-            font-size: 20px;
-        }
-        h4{
-            color: black;
-            font-size: 20px;
-        }
-        p{
-            color: blue;
+            font-size: 1.5em;
         }
 
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px; /* Adjust spacing between buttons */
+        }
+
+        button {
+            font-size: 1.2em;
+        }
+
+        .chart-heading {
+            text-align: center;
+            color: blue;
+            display: none;
+        }
+
+        .chart-container {
+            width: 800px;
+            display: none;
+            margin: 0 auto; /* Centering the chart container */
+        }
     </style>
 </head>
 <body>
-<h1>-BIL481 Project- </h1>
-<h2>This project helps us understand the current positions of airplanes with graphics. </h2>
-<h3>-->We are using Ladd datas(Limiting Aircraft Data Displayed) from an ADSB project. </h3>
-<h4>-->You can view our charts below by selecting them: </h4>
-<!-- <div style="width: 500px;"><canvas id="dimensions"></canvas></div><br/> -->
-<p>-Line chart for current positions:</p>
-<div style="width: 800px;"><canvas id="lineChart"></canvas></div>
 
-<p>-Scatter chart for current positions:</p>
-<div style="width: 800px;"><canvas id="scatterChart"></canvas></div>
+<h1 style="color: darkslateblue; font-size: 2em;">-BIL481 Project-</h1>
+<p style="font-size: 1.2em;">This project helps us understand the current positions of airplanes with graphics. <br>
+    - We are using Ladd datas (Limiting Aircraft Data Displayed) from an ADSB project. <br>
+    - You can view our charts below by selecting them:
+</p>
 
-<p>-Radar chart for current positions:</p>
-<div style="width: 800px;"><canvas id="radarChart"></canvas></div>
+<div class="button-container">
+    <button id="showLineChartButton">Show Line Chart</button>
+    <button id="showScatterChartButton">Show Scatter Chart</button>
+    <button id="showRadarChartButton">Show Radar Chart</button>
+</div>
 
-<script type="module" src="scripts/lineChart.js"></script>
-<script type="module" src="scripts/scatterChart.js"></script>
-<script type="module" src="scripts/radarChart.js"></script>
+<div id="lineChartContainer" class="chart-container">
+    <h2 class="chart-heading">Line Chart for Current Positions</h2>
+    <canvas id="lineChart"></canvas>
+</div>
+<div id="scatterChartContainer" class="chart-container">
+    <h2 class="chart-heading">Scatter Chart for Current Positions</h2>
+    <canvas id="scatterChart"></canvas>
+</div>
+<div id="radarChartContainer" class="chart-container">
+    <h2 class="chart-heading">Radar Chart for Current Positions</h2>
+    <canvas id="radarChart"></canvas>
+</div>
+
+<div class="button-container">
+    <button id="hideLineChartButton" style="display: none;">Hide Line Chart</button>
+    <button id="hideScatterChartButton" style="display: none;">Hide Scatter Chart</button>
+    <button id="hideRadarChartButton" style="display: none;">Hide Radar Chart</button>
+</div>
+
+<script type="module">
+    let chartShown = false;
+
+    document.getElementById("showLineChartButton").addEventListener("click", function() {
+        if (!chartShown) {
+            chartShown = true;
+            import('./scripts/lineChart.js').then(module => {
+                document.getElementById("lineChartContainer").style.display = "block";
+                document.querySelector("#lineChartContainer .chart-heading").style.display = "block";
+                document.getElementById("hideLineChartButton").style.display = "block";
+            });
+        }
+    });
+
+    document.getElementById("showScatterChartButton").addEventListener("click", function() {
+        if (!chartShown) {
+            chartShown = true;
+            import('./scripts/scatterChart.js').then(module => {
+                document.getElementById("scatterChartContainer").style.display = "block";
+                document.querySelector("#scatterChartContainer .chart-heading").style.display = "block";
+                document.getElementById("hideScatterChartButton").style.display = "block";
+            });
+        }
+    });
+
+    document.getElementById("showRadarChartButton").addEventListener("click", function() {
+        if (!chartShown) {
+            chartShown = true;
+            import('./scripts/radarChart.js').then(module => {
+                document.getElementById("radarChartContainer").style.display = "block";
+                document.querySelector("#radarChartContainer .chart-heading").style.display = "block";
+                document.getElementById("hideRadarChartButton").style.display = "block";
+            });
+        }
+    });
+
+    document.getElementById("hideLineChartButton").addEventListener("click", function() {
+        document.getElementById("lineChartContainer").style.display = "none";
+        document.querySelector("#lineChartContainer .chart-heading").style.display = "none";
+        document.getElementById("hideLineChartButton").style.display = "none";
+        chartShown = false;
+    });
+
+    document.getElementById("hideScatterChartButton").addEventListener("click", function() {
+        document.getElementById("scatterChartContainer").style.display = "none";
+        document.querySelector("#scatterChartContainer .chart-heading").style.display = "none";
+        document.getElementById("hideScatterChartButton").style.display = "none";
+        chartShown = false;
+    });
+
+    document.getElementById("hideRadarChartButton").addEventListener("click", function() {
+        document.getElementById("radarChartContainer").style.display = "none";
+        document.querySelector("#radarChartContainer .chart-heading").style.display = "none";
+        document.getElementById("hideRadarChartButton").style.display = "none";
+        chartShown = false;
+    });
+</script>
+
 </body>
 </html>
