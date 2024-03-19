@@ -1,2 +1,0 @@
-var t=globalThis.parcelRequiref1b2;(0,t.register)("7jZcF",function(a,n){var l=t("jqz8H"),e=t("c47nl");!async function(){let t=await (0,e.getDataFromAPI)("/v2/ladd").then(t=>t),a=t?.ac.slice(0,10).map(t=>({lat:t.lat.toString().substring(0,t.lat.toString().indexOf(".")),long:t.lon.toString().substring(0,t.lon.toString().indexOf("."))}));new l.default(document.getElementById("lineChart"),{type:"line",data:{labels:a.map(t=>t.lat),datasets:[{label:"Plain locations on line chart",data:a.map(t=>t.long)}]}})}()});
-//# sourceMappingURL=lineChart.42bac8f5.js.map

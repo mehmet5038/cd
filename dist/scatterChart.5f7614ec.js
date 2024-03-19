@@ -1,2 +1,0 @@
-var t=globalThis.parcelRequiref1b2;(0,t.register)("7nMij",function(a,n){var e=t("jqz8H"),l=t("c47nl");!async function(){let t=await (0,l.getDataFromAPI)("/v2/ladd").then(t=>t),a=t?.ac.slice(0,10).map(t=>({lat:t.lat.toString().substring(0,t.lat.toString().indexOf(".")),long:t.lon.toString().substring(0,t.lon.toString().indexOf("."))}));new e.default(document.getElementById("scatterChart"),{type:"scatter",data:{labels:a.map(t=>t.lat),datasets:[{label:"Plain locations on scatter chart",data:a.map(t=>t.long)}]}})}()});
-//# sourceMappingURL=scatterChart.5f7614ec.js.map
