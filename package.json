@@ -6,13 +6,13 @@
     "dev": "parcel src/index.html",
     "build": "parcel build src/index.html"
   },
-
   "type": "module",
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "buffer": "^6.0.3",
-    "parcel": "^2.6.2"
+    "parcel": "^2.6.2",
+    "wrangler": "^3.34.2"
   },
   "dependencies": {
     "@cubejs-client/core": "^0.31.0",
