@@ -2,6 +2,8 @@
 
 [![Node.js CI](https://github.com/TOBB-ETU-BIL481-SPRING-24/SoftwareSorcerers/actions/workflows/node.js.yml/badge.svg?branch=main)](https://github.com/TOBB-ETU-BIL481-SPRING-24/SoftwareSorcerers/actions/workflows/node.js.yml)
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/25ca7f6f-9b0c-4b52-97af-ad0e15f89689/deploy-status)](https://app.netlify.com/sites/fluffy-kitsune-6644f7/deploys)
+
 <h1 style="font-size: 24px;">ADS-B Aircraft Location Graph Project</h1>
 This project utilizes ADS-B (Automatic Dependent Surveillance – Broadcast) data to visualize the positions and altitudes of aircraft using various graphs.
 <h1 style="font-size: 24px;">Project Description</h1>
