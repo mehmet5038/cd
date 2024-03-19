@@ -1,14 +1,19 @@
-name: 'My Netfly Workflow'
+name: 'Netlify Deploy'
 
 on:
   release:
-    types: [published]
+    types: ['published']
 
 jobs:
   deploy:
-    name: 'Deploy to Netlify'
+    name: 'Deploy'
+    runs-on: ubuntu-latest
+
     steps:
-      - uses: jsmrcaga/action-netlify-deploy@v2.0.0
+      - uses: actions/checkout@v3
+      - uses: jsmrcaga/action-netlify-deploy@master
         with:
-          NETLIFY_AUTH_TOKEN: nfp_SR7PvWyQUw5gLZE7CpdFej3ZRXHtukKb2b60
+          NETLIFY_AUTH_TOKEN: nfp_pyeS8zmmNJyzVt78scd65bgStsckdWdv7b4a
+          NETLIFY_SITE_ID: 4fc48113-b688-45f1-9dae-4c6ac4bcdbe1
+          NETLIFY_DEPLOY_MESSAGE: "Prod deploy v${{ github.ref }}"
           NETLIFY_DEPLOY_TO_PROD: true
