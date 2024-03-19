@@ -1,0 +1,17 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: akhileshns/heroku-deploy@v3.13.15 
+        with:
+          heroku_api_key: "dca13fc5-be94-4ff2-ba76-b381c6238cd6"
+          heroku_app_name: "bil481project" 
+          heroku_email: "mkaratekin@etu.edu.tr"

@@ -43,7 +43,7 @@ import { getDataFromAPI } from "../server/server";
                 scales: {
                     r: {
                         min: 0, // Minimum value for the radial axis
-                        // You can add additional configuration for the radial axis here
+                        
                     }
                 },
                 plugins: {
