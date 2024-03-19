@@ -1,2 +1,0 @@
-var a=globalThis.parcelRequiref1b2;(0,a.register)("h7z89",function(t,n){var l=a("jqz8H"),e=a("c47nl");!async function(){let a=await (0,e.getDataFromAPI)("/v2/pia").then(a=>a),t=a?.ac.slice(0,10).map(a=>({lat:a.lat.toString().substring(0,a.lat.toString().indexOf(".")),long:a.lon.toString().substring(0,a.lon.toString().indexOf("."))}));new l.default(document.getElementById("radarChart"),{type:"radar",data:{labels:t.map(a=>a.lat),datasets:[{label:"Plain locations on radar chart",data:t.map(a=>a.long)}]}})}()});
-//# sourceMappingURL=radarChart.e728cbea.js.map
