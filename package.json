@@ -6,7 +6,6 @@
     "dev": "parcel src/index.html",
     "build": "parcel build src/index.html"
   },
-
   "type": "module",
   "author": "",
   "license": "ISC",
@@ -17,6 +16,7 @@
   "dependencies": {
     "@cubejs-client/core": "^0.31.0",
     "axios": "^1.6.7",
-    "chart.js": "^4.0.0"
+    "chart.js": "^4.0.0",
+    "terraform": "^1.23.0"
   }
 }
