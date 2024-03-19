@@ -1,0 +1,15 @@
+name: Deploy Theme
+on:
+  push:
+    branches:
+      - main
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Deploy Ghost Theme
+        uses: TryGhost/action-deploy-theme@v1
+        with:
+          api-url: https://bil481project.ghost.io
+          api-key: 65f94778acad480008504c4c:33b4a26a002f0312b761b38f2b6fa6a90b121fb92a997527d1a92c1c12aaf778
