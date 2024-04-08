@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Chart.js example</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-streaming@2.0.0/dist/chartjs-plugin-streaming.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <style>
+        h1, p {
+            text-align: center;
+            font-size: 1.5em;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px; /* Adjust spacing between buttons */
+            margin-top: 20px;
+        }
+
+        button {
+            font-size: 1.2em;
+        }
+
+        .chart-heading {
+            text-align: center;
+            color: blue;
+            display: none;
+        }
+
+        .radar-tooltip {
+	        color: #333;
+	        box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+	        background: rgba(255, 255, 255, 0.9);
+	        border: 1px solid #ddd;
+	        border-radius: 5px;
+	        padding: 10px;
+	        pointer-events: none;
+	        position: absolute;
+	        opacity: 0;
+	        font-size: 0.9em;
+	        transition: opacity 0.5s;
+    	}
+
+        .chart-container {
+            width: 1000px;
+            display: none;
+            margin: 0 auto; /* Centering the chart container */
+        }
+
+	    #radarChartContainer {
+	        position: relative;
+	        width: 600px;
+	        height: 400px;
+	        margin-bottom: 20px;
+	        display: flex;
+	        justify-content: center;
+	        align-items: center;
+	    }
+
+	    #hideRadarChartButton {
+		    bottom: 20px; /* Increases the distance from the bottom */
+		    left: 50%; /* Keeps it horizontally centered */
+		    transform: translateX(140%); /* Ensures it stays centered */
+		}
+
+	    #inputContainer {
+		    display: none;
+		}
+
+    #filterForm {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+
+    #filterForm label, #filterForm input, #filterForm button {
+        margin: 5px;
+    }
+
+    .flight-select-box {
+        justify-content: center;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    
+    </style>
+</head>
+<body>
+
+<h1 style="color: darkslateblue; font-size: 2em;">-BIL481 Project-</h1>
+<p style="font-size: 1.2em;">This project helps us understand the current positions of airplanes with graphics. <br>
+    - We are using Ladd datas (Limiting Aircraft Data Displayed) from an ADSB project. <br>
+    - You can view our charts below by selecting them:
+</p>
+
+<div class="button-container">
+    <button id="showLineChartButton">Show Line Chart</button>
+    <button id="showScatterChartButton">Show Scatter Chart</button>
+    <button id="showRadarChartButton">Show Radar Chart</button>
+</div>
+
+<div class="chart-container" id="lineChartContainer">
+    <h2 class="chart-heading">Line Chart for Current Positions</h2>
+    <div class="flight-select-box">
+        <h3>Select Flight:</h3>
+        <div id="comboBox"></div>
+    </div>
+    <canvas id="lineChart"></canvas>
+</div>
+<div class="chart-container" id="scatterChartContainer">
+    <h2 class="chart-heading">Scatter Chart for Current Positions</h2>
+    <div id="filterForm">
+      <label for="latMin">Latitude Min:</label>
+      <input type="number" id="latMin" name="latMin" required>
+
+      <label for="latMax">Latitude Max:</label>
+      <input type="number" id="latMax" name="latMax" required>
+
+      <label for="lonMin">Longitude Min:</label>
+      <input type="number" id="lonMin" name="lonMin" required>
+
+      <label for="lonMax">Longitude Max:</label>
+      <input type="number" id="lonMax" name="lonMax" required>
+      <button type="submit" id="applyFiltersButton">Apply Filters</button>
+    </div>
+    <canvas id="scatterChart"></canvas>
+</div>
+<div class="chart-container" id="radarChartContainer">
+        <h2 class="chart-heading">Radar Chart for Current Positions</h2>
+        <div id="radarChart"></div> <!-- Changed from canvas to a div for D3.js -->
+        <div id="inputContainer">
+		    <input id="latitudeInput" type="number" step="any" placeholder="Latitude"/>
+		    <input id="longitudeInput" type="number" step="any" placeholder="Longitude"/>
+		    <input id="radiusInput" type="number" step="any" placeholder="Radius (in nm)"/>
+		    <button id="fetchDataButton">Fetch Data</button>
+		</div>
+        <button id="hideRadarChartButton" style="display: none;">Hide Radar Chart</button>
+    </div>
+<div class="button-container">
+    <button id="hideLineChartButton" style="display: none;">Hide Line Chart</button>
+    <button id="hideScatterChartButton" style="display: none;">Hide Scatter Chart</button>
+</div>
+
+<script type="module">
+    let chartShown = false;
+
+    document.getElementById("showLineChartButton").addEventListener("click", function () {
+        if (!chartShown) {
+            chartShown = true;
+            import('./scripts/lineChart.js').then(module => {
+                document.getElementById("lineChartContainer").style.display = "block";
+                document.querySelector("#lineChartContainer .chart-heading").style.display = "block";
+                document.getElementById("hideLineChartButton").style.display = "block";
+            });
+        }
+    });
+
+    document.getElementById("showScatterChartButton").addEventListener("click", function () {
+        if (!chartShown) {
+            chartShown = true;
+            import('./scripts/scatterChart.js').then(module => {
+                document.getElementById("scatterChartContainer").style.display = "block";
+                document.querySelector("#scatterChartContainer .chart-heading").style.display = "block";
+                document.getElementById("hideScatterChartButton").style.display = "block";
+            });
+        }
+    });
+
+    document.getElementById("showRadarChartButton").addEventListener("click", function () {
+            if (!chartShown) {
+                chartShown = true;
+                import('./scripts/radarChart.js').then(module => { // This will be your D3 radar chart script
+					document.getElementById("inputContainer").style.display = "block";
+                    document.getElementById("radarChartContainer").style.display = "block";
+                    document.querySelector("#radarChartContainer .chart-heading").style.display = "block";
+                    document.getElementById("hideRadarChartButton").style.display = "block";
+                });
+            }
+        });
+
+    document.getElementById("hideLineChartButton").addEventListener("click", function () {
+        document.getElementById("lineChartContainer").style.display = "none";
+        document.querySelector("#lineChartContainer .chart-heading").style.display = "none";
+        document.getElementById("hideLineChartButton").style.display = "none";
+        chartShown = false;
+    });
+
+    document.getElementById("hideScatterChartButton").addEventListener("click", function () {
+        document.getElementById("scatterChartContainer").style.display = "none";
+        document.querySelector("#scatterChartContainer .chart-heading").style.display = "none";
+        document.getElementById("hideScatterChartButton").style.display = "none";
+        chartShown = false;
+    });
+
+    document.getElementById("hideRadarChartButton").addEventListener("click", function () {
+        document.getElementById("radarChartContainer").style.display = "none";
+        document.querySelector("#radarChartContainer .chart-heading").style.display = "none";
+        document.getElementById("hideRadarChartButton").style.display = "none";
+        chartShown = false;
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,25 @@
+{
+  "name": "chart",
+  "version": "1.0.0",
+  "description": "ADSB graphics page",
+  "scripts": {
+    "dev": "parcel src/index.html",
+    "build": "parcel build src/index.html"
+  },
+  "type": "module",
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "buffer": "^6.0.3",
+    "parcel": "^2.6.2"
+  },
+  "dependencies": {
+    "@cubejs-client/core": "^0.31.0",
+    "axios": "^1.6.7",
+    "chart.js": "^3.9.1",
+    "chartjs-adapter-date-fns": "^3.0.0",
+    "chartjs-plugin-streaming": "^2.0.0",
+    "d3": "^7.9.0",
+    "svgo": "^3.2.0"
+  }
+}

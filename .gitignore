@@ -1,0 +1,7 @@
+target/
+.idea
+node_modules
+.parcel-cache
+.project
+.settings/
+dist
